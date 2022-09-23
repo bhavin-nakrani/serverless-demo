@@ -1,0 +1,43 @@
+{
+  "name": "serverlessDemo",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhavin-nakrani/serverless-demo.git"
+  },
+  "keywords": [
+    "node",
+    "js"
+  ],
+  "bugs": {
+    "url": "https://github.com/bhavin-nakrani/serverless-demo/issues"
+  },
+  "homepage": "https://github.com/bhavin-nakrani/serverless-demo#readme",
+  "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@types/sequelize": "^4.28.9",
+    "apollo-server-lambda": "^2.19.1",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "graphql": "^15.4.0",
+    "graphql-type-json": "^0.3.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "lodash": "^4.17.15",
+    "sequelize": "^6.3.5",
+    "serverless-sequelize-migrations": "^1.1.1",
+    "slugify": "^1.4.6"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0",
+    "serverless-dotenv-plugin": "^3.9.0",
+    "serverless-offline": "^7.0.0",
+    "serverless-prune-plugin": "^1.4.3"
+  }
+}

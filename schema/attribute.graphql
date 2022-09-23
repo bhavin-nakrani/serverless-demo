@@ -1,0 +1,56 @@
+scalar Date
+
+type Query {
+  attributes: [Attribute]
+  attributeById(id: ID!): Attribute
+  attributeList(
+    offset: Int
+    num_of_records: Int
+    name: String
+  ): AttributeWithCount
+}
+
+type Mutation {
+  createAttribute(
+    name: String!
+    status_id: Int
+    created_by: Int
+    created_at: Date
+  ): Attribute!
+  updateAttribute(
+    id: ID!
+    name: String
+    status_id: Int
+    updated_by: Int
+    updated_at: Date
+  ): Attribute!
+  deleteAttribute(id: ID!): String
+}
+
+type AttributeWithCount {
+  count: Int
+  rows: [Attribute]
+}
+
+type Attribute {
+  id: ID!
+  parent_id: Int
+  name: String
+  status_id: Int
+  slug: String
+  status: Status
+  created_by: Int
+  updated_by: Int
+  created_at: Date
+  updated_at: Date
+}
+
+type Status {
+  id: ID!
+  name: String
+  slug: String
+  created_by: Int
+  updated_by: Int
+  created_at: Date
+  updated_at: Date
+}

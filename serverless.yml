@@ -1,0 +1,51 @@
+org: Simform
+service: backend
+app: serverlessDemo
+plugins:
+  - serverless-offline
+  - serverless-sequelize-migrations
+  - serverless-prune-plugin
+  - serverless-dotenv-plugin
+useDotenv: true
+
+provider:
+  name: aws
+  region: "us-west-2"
+  endpointType: regional
+  versionFunctions: false
+  apiGateway:
+    shouldStartNameWithService: true
+  environment:
+    POOL_ID: ${param:POOL_ID}
+    CLIENT_ID: ${param:CLIENT_ID}
+    CLIENT_SECRET: ${param:CLIENT_SECRET}
+    NODE_ENV: ${param:NODE_ENV,env:NODE_ENV}
+    DB_HOST: ${param:DB_HOST,env:DB_HOST}
+    DB_USER: ${param:DB_USER,env:DB_USER}
+    DB_PASSWORD: ${param:DB_PASSWORD,env:DB_PASSWORD}
+    DB_NAME: ${param:DB_NAME,env:DB_NAME}
+    DB_PORT: ${param:DB_PORT,env:DB_PORT}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "cognito-idp:AdminInitiateAuth"
+      Resource:
+        - "arn:aws:cognito-idp:*"
+# package:
+#   patterns:
+#     - "!node_modules/**"
+
+functions:
+  attribute:
+    handler: functions/attribute.attributeHandler
+    runtime: nodejs12.x
+    events:
+      - http:
+          path: attribute
+          method: post
+          cors:
+            origin: "*"
+          integration: lambda-proxy
+          authorizer:
+            name: authorizer
+            arn: ${param:COGNITO_POOL_ARN}
